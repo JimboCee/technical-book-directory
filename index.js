@@ -8,5 +8,6 @@ const port = process.env.PORT || 3000
 app.use(bodyParser.json());
 app.use('/api/v1', api);
 
-app.listen(port, () => console.log(`App listening on port ${port}`));
+app.listen(port, () => 
+console.log(`Example app listening at http://localhost:${port}`));
 
