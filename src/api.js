@@ -2,11 +2,12 @@ const router = require('express').Router();
 const books = require('./books');
 
 let booksDirectory = books;
-
+//book list function, 
 
 router.get('/books', function(req, res) {
     res.send(booksDirectory);
 });
+//Calls the Book directory to list all books in books.js
 
 router.get('/books/:id', function(req, res) {
     const {id} = req.params; 
@@ -16,6 +17,7 @@ router.get('/books/:id', function(req, res) {
 
     res.send(book);
 });
+// calls for a book using its ISBN number using .find, the function on line 15 checks to see if the isbn is equal to the ID. If its not, it sends a 404 error
 
 router.post('/books', function(req, res) {
     const {
@@ -48,6 +50,7 @@ router.post('/books', function(req, res) {
 
     res.send(book);
 });
+//fields of entry for each of the books, these will be used in the 'updatedBook' const - new books can be added
 
 router.put('/books/:id', function(req, res) {
     const {id} = req.params;
@@ -64,7 +67,7 @@ router.put('/books/:id', function(req, res) {
 
     const book = booksDirectory.find(b => b.isbn === id);
     if (!book) return res.send("Book Does Not Exist!");
-
+//for when a user searches for a book using its ID/ISBN
 
     const updateField = (val, prev) => !val ? prev : val;
 
@@ -79,12 +82,10 @@ router.put('/books/:id', function(req, res) {
         authors: updateField(authors, book.authors),
         categories: updateField(categories, book.categories),
     };
-
     const bookIndex = booksDirectory.findIndex(b => b.isbn === id);
     booksDirectory.splice(bookIndex, 1, updatedBook);
-
     res.send(updatedBook);
-
+// Constructor used for updating a book when the user enters information into insomnia client as a put request. 
 });
 
 router.delete('/books/:id', function(req, res) {
@@ -97,5 +98,5 @@ router.delete('/books/:id', function(req, res) {
 
     res.send("Success");
 });
-
+//delete function. Finds the book based on an ID search and deletes it from the database. If the API can't find the book, it displays a 404 error message.
 module.exports = router;

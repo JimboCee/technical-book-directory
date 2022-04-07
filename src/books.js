@@ -1,5 +1,5 @@
 module.exports = [
-
+//list of technical books, an array of elements collated in an API
     {
         "title": "Unlocking Android: A Developer's Guide",
         "isbn": "1933988673",
