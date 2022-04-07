@@ -9,5 +9,5 @@ app.use(bodyParser.json());
 app.use('/api/v1', api);
 
 app.listen(port, () => 
-console.log(`Live`));
+console.log(`App listening on http://localhost:3000`));
 
