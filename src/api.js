@@ -34,7 +34,7 @@ router.post('/books', function(req, res) {
 
     const bookExist = booksDirectory.find(b =>b.isbn === isbn);
     if (bookExist) return res.send("Book Already Exists!");
-
+//check to see if the book we are creating already exists
     const book = {
         title,
         isbn,
@@ -50,7 +50,7 @@ router.post('/books', function(req, res) {
 
     res.send(book);
 });
-//fields of entry for each of the books, these will be used in the 'updatedBook' const - new books can be added
+//fields of entry for each of the books, these will be used in the 'updatedBook' const - new books can be added using these parameters
 
 router.put('/books/:id', function(req, res) {
     const {id} = req.params;
@@ -85,7 +85,7 @@ router.put('/books/:id', function(req, res) {
     const bookIndex = booksDirectory.findIndex(b => b.isbn === id);
     booksDirectory.splice(bookIndex, 1, updatedBook);
     res.send(updatedBook);
-// Constructor used for updating a book when the user enters information into insomnia client as a put request. 
+// Constructor used for updating a book when the user enters information into insomnia client as a put request. passes all properties and uses updateField functions to adapt the values
 });
 
 router.delete('/books/:id', function(req, res) {
